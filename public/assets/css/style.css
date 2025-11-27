@@ -1,0 +1,23 @@
+::-webkit-scrollbar {
+    display: none;
+}
+
+.edit {
+    transition: opacity .2s ease;
+    cursor: pointer;
+    opacity: 0;
+}
+
+.avatarPreview:hover .edit {
+    opacity: .7;
+}
+
+.avatarPreview,
+#avatar {
+    width: 15em;
+    height: 15em;
+}
+
+#avatar {
+    opacity: 0;
+}
