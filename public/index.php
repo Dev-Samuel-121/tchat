@@ -8,17 +8,14 @@
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
-    <title>Document</title>
+    <title>Create User & Chat</title>
 </head>
 
 <body data-bs-theme="dark">
-    <!-- BTN OFFCANVAS CHAT -->
-    <a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasChat" role="button"
-        aria-controls="offcanvasChat">
-        Chat Offcanvas
-    </a>
 
-    <!-- BTN CREATE USER -->
+    <!-- BOTÕES -->
+    <a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasChat" role="button"
+        aria-controls="offcanvasChat">Chat Offcanvas</a>
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCreateUser">
         Create User Modal
     </button>
@@ -30,29 +27,17 @@
             <h5 class="offcanvas-title" id="offcanvasChatLabel">Nome do chamado</h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-        <div class="offcanvas-body container col d-flex flex-column pb-3">
-            <div id="containerMsg" class="col py-3 d-flex flex-column gap-3 overflow-y-auto">
-                <div class="fs-4 w-75 d-flex gap-3 flex-row align-items-end justify-content-start me-auto">
-                    <span class="rounded-circle col-1 bg-dark-subtle" style="width: 2.5em; height: 2.5em;"></span>
-                    <div class="text-body rounded-5 px-4 py-3 d-flex flex-column bg-dark-subtle">
-                        <span>asdfsad</span><span class="fs-5 me-auto text-body-tertiary">23:06</span>
-                    </div>
-                </div>
-                <div class="fs-4 w-75 d-flex gap-3 flex-row align-items-end justify-content-end ms-auto">
-                    <div class="text-body rounded-5 px-4 py-3 d-flex flex-column bg-light-subtle">
-                        <span>asdfsad</span><span class="fs-5 ms-auto text-body-tertiary">23:06</span>
-                    </div><span class="rounded-circle col-1 bg-light-subtle"
-                        style="width: 2.5em; height: 2.5em;"></span>
-                </div>
+        <div class="offcanvas-body d-flex flex-column">
+            <div id="containerMsg" class="flex-grow-1 py-3 d-flex flex-column gap-3 overflow-auto">
+                <!-- Mensagens -->
             </div>
-        </div>
-        <div class="d-flex border border-3 rounded-pill mx-3 mb-3">
-            <button id="clip" class="btn rounded-start-pill"><i class="bi bi-paperclip fs-4"></i></button>
-            <button id="emoji" class="btn"><i class="bi bi-emoji-smile fs-4"></i></button>
-            <textarea id="msg" class="form-control border-0 fs-5 py-3" style="resize: none;" rows="1"
-                placeholder="Mensagem"></textarea>
-            <button id="microfone" class="btn rounded-end-pill"><i class="bi bi-mic fs-4"></i></button>
-            <!-- <button id="send" class="btn rounded-end-pill"><i class="bi bi-send fs-4"></i></button> -->
+            <div class="d-flex border border-3 rounded-pill mt-2">
+                <button id="clip" class="btn rounded-start-pill"><i class="bi bi-paperclip fs-4"></i></button>
+                <button id="emoji" class="btn"><i class="bi bi-emoji-smile fs-4"></i></button>
+                <textarea id="msg" class="form-control border-0 fs-5 py-3" style="resize: none;" rows="1"
+                    placeholder="Mensagem"></textarea>
+                <button id="microfone" class="btn rounded-end-pill"><i class="bi bi-mic fs-4"></i></button>
+            </div>
         </div>
     </div>
 
@@ -67,7 +52,7 @@
                 </div>
                 <form id="formCreateUser" class="needs-validation" enctype="multipart/form-data" novalidate>
                     <div class="modal-body">
-                        <!--todo AVATAR -->
+                        <!-- Avatar -->
                         <div class="mb-3">
                             <div
                                 class="d-flex justify-content-center align-items-center m-auto border rounded-circle position-relative avatarPreview">
@@ -76,36 +61,105 @@
                                         class="bi bi-pen"></i></label>
                             </div>
                         </div>
-
-                        <!--* USERNAME -->
+                        <!-- Username -->
                         <div class="form-floating mb-3">
                             <input type="text" name="inputUsername" id="username" class="form-control"
                                 placeholder="Username" required>
                             <label for="username">Username</label>
-                            <div class="valid-feedback">loock good</div>
+                            <div class="valid-feedback">Looks good!</div>
                             <div class="invalid-feedback">Insert the username</div>
                         </div>
-
-                        <!--* PASSWORD -->
-                        <div class="form-floating m-auto row">
-                            <input type="password" name="inputPassword" id="password"
-                                class="form-control rounded-end-0 col" placeholder="Password" required>
+                        <!-- Password -->
+                        <div class="form-floating mb-3 position-relative">
+                            <input type="password" name="inputPassword" id="password" class="form-control pe-5"
+                                placeholder="Password" required>
                             <label for="password">Password</label>
-
-                            <button type="button" class="btn btn-outline-secondary rounded-start-0 col-1"
+                            <button type="button" class="btn btn-outline-secondary position-absolute top-0 end-0 h-100"
                                 id="passwordPreview"><i class="bi bi-eye"></i></button>
-
-                            <div class="valid-feedback">loock good</div>
+                            <div class="valid-feedback">Looks good!</div>
                             <div class="invalid-feedback">Insert the password</div>
                         </div>
                     </div>
                     <div class="modal-footer d-flex justify-content-between">
-                        <div class="d-flex gap-2">
-                            <button type="button" class="btn btn-outline-primary" id="autoUser">Auto user</button>
-                            <input type="number" class="form-control w-50" name="inputResults" id="results" min="1"
-                                max="5000" value="1">
-                        </div>
+                        <button type="button" class="btn btn-outline-primary" data-bs-target="#modalAutoUser"
+                            data-bs-toggle="modal">Auto user</button>
                         <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL AUTO USER -->
+    <div class="modal fade" id="modalAutoUser" tabindex="-1" aria-labelledby="modalAutoUserLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="modalAutoUserLabel">Auto User</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="formAutoUser" class="needs-validation" novalidate>
+                    <div class="modal-body">
+                        <!-- Nationality -->
+                        <div class="mb-3">
+                            <label for="nationality" class="form-label">Nationality</label>
+                            <select class="form-select form-select-lg" id="nationality" required>
+                                <option value="" selected>Select the nationality</option>
+                                <option value="all">All</option>
+                                <option value="au">Australia</option>
+                                <option value="br">Brazil</option>
+                                <option value="ca">Canada</option>
+                                <option value="ch">Switzerland</option>
+                                <option value="de">Germany</option>
+                                <option value="dk">Denmark</option>
+                                <option value="es">Spain</option>
+                                <option value="fi">Finland</option>
+                                <option value="fr">France</option>
+                                <option value="gb">United Kingdom</option>
+                                <option value="ie">Ireland</option>
+                                <option value="in">India</option>
+                                <option value="ir">Iran</option>
+                                <option value="mx">Mexico</option>
+                                <option value="nl">Netherlands</option>
+                                <option value="no">Norway</option>
+                                <option value="nz">New Zealand</option>
+                                <option value="rs">Serbia</option>
+                                <option value="tr">Türkiye / Turkey</option>
+                                <option value="ua">Ukraine</option>
+                                <option value="us">United States</option>
+                            </select>
+                            <div class="invalid-feedback">Select the nationality.</div>
+                        </div>
+                        <!-- Gender -->
+                        <div class="mb-3">
+                            <label for="gender" class="form-label">Gender</label>
+                            <select class="form-select form-select-lg" id="gender" required>
+                                <option value="" selected>Select the gender</option>
+                                <option value="all">All</option>
+                                <option value="female">Female</option>
+                                <option value="male">Male</option>
+                            </select>
+                            <div class="invalid-feedback">Select the gender.</div>
+                        </div>
+                        <!-- Users -->
+                        <div>
+                            <label for="users" class="form-label">
+                                Users:
+                            </label>
+                            <div class="d-flex justify-content-center align-items-center gap-3">
+                                <span>
+                                    <input type="number" class="form-control col" id="numberUsers" min="1" max="1000"
+                                        value="1">
+                                </span>
+
+                                <input type="range" class="form-range" id="users" min="1" max="1000" step="1" value="1">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-between">
+                        <button type="button" class="btn btn-outline-primary" data-bs-target="#modalCreateUser"
+                            data-bs-toggle="modal">Back</button>
+                        <button type="submit" class="btn btn-primary" id="autoUser">Create</button>
                     </div>
                 </form>
             </div>

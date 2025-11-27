@@ -1,23 +1,27 @@
-let formCreateUser = document.querySelector('#formCreateUser');
-let bntPasswordPreview = document.querySelector('#passwordPreview');
-let inputPassword = document.querySelector('#password');
+// === SELECTORES ===
+const formCreateUser = document.querySelector('#formCreateUser');
+const btnPasswordPreview = document.querySelector('#passwordPreview');
+const inputPassword = document.querySelector('#password');
 
-let btnAutoUser = document.querySelector('#autoUser');
-let inputResults = document.querySelector('#results');
+const btnAutoUser = document.querySelector('#autoUser');
+const inputNationality = document.querySelector('#nationality');
+const inputGender = document.querySelector('#gender');
+const inputUsers = document.querySelector('#users');
+const numberUsers = document.querySelector('#numberUsers');
 
-bntPasswordPreview.addEventListener('click', () => {
-    let icon = bntPasswordPreview.querySelector('i');
+// === PASSWORD SHOW/HIDE ===
+btnPasswordPreview.addEventListener('click', () => {
+    const icon = btnPasswordPreview.querySelector('i');
     if (icon.classList.contains('bi-eye')) {
-        icon.classList.remove('bi-eye');
-        icon.classList.add('bi-eye-slash');
+        icon.classList.replace('bi-eye', 'bi-eye-slash');
         inputPassword.type = 'text';
     } else {
-        icon.classList.remove('bi-eye-slash');
-        icon.classList.add('bi-eye');
+        icon.classList.replace('bi-eye-slash', 'bi-eye');
         inputPassword.type = 'password';
     }
 });
 
+// === FORM CREATE USER ===
 formCreateUser.addEventListener('submit', (e) => {
     e.preventDefault();
 
@@ -26,7 +30,7 @@ formCreateUser.addEventListener('submit', (e) => {
         return;
     }
 
-    let formData = new FormData(e.target);
+    const formData = new FormData(formCreateUser);
 
     fetch("assets/php/salvar_usuario.php", {
         method: "POST",
@@ -36,6 +40,8 @@ formCreateUser.addEventListener('submit', (e) => {
         .then(resposta => {
             console.log(resposta);
             alert("Usuário salvo!");
+            formCreateUser.reset();
+            formCreateUser.classList.remove('was-validated');
         })
         .catch(err => {
             console.error(err);
@@ -43,11 +49,15 @@ formCreateUser.addEventListener('submit', (e) => {
         });
 });
 
+// === AUTO USER ===
 btnAutoUser.addEventListener('click', (e) => {
     e.preventDefault();
 
-    let fd = new FormData();
-    fd.append('results', inputResults.value);
+    const fd = new FormData();
+    fd.append('nationality', inputNationality.value);
+    fd.append('gender', inputGender.value);
+    fd.append('users', numberUsers.value);
+
     fetch("assets/php/auto_user.php", {
         method: "POST",
         body: fd
@@ -63,22 +73,28 @@ btnAutoUser.addEventListener('click', (e) => {
         });
 });
 
-// Example starter JavaScript for disabling form submissions if there are invalid fields
+// === RANGE NUMBER USERS UPDATE ===
+numberUsers.addEventListener('input', () => {
+    inputUsers.value = numberUsers.value;
+});
+
+// === RANGE USERS UPDATE ===
+inputUsers.addEventListener('input', () => {
+    numberUsers.value = inputUsers.value;
+});
+
+// === Bootstrap Form Validation ===
 (() => {
-    'use strict'
+    'use strict';
+    const forms = document.querySelectorAll('.needs-validation');
 
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    const forms = document.querySelectorAll('.needs-validation')
-
-    // Loop over them and prevent submission
     Array.from(forms).forEach(form => {
         form.addEventListener('submit', event => {
             if (!form.checkValidity()) {
-                event.preventDefault()
-                event.stopPropagation()
+                event.preventDefault();
+                event.stopPropagation();
             }
-
-            form.classList.add('was-validated')
-        }, false)
-    })
-})()
+            form.classList.add('was-validated');
+        }, false);
+    });
+})();
