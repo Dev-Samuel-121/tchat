@@ -13,7 +13,6 @@ let selectUsers = document.querySelector('.users');
 let btnSelectUsers = document.querySelector('#btnSelectUser');
 
 btnSelectUsers.addEventListener('click', async () => {
-    let containerUsers = selectUsers.querySelectorAll('.user');
     let users = await getUsers();
     users.forEach(montarUsers);
 });
@@ -26,6 +25,9 @@ function montarUsers(user) {
     let info = document.createElement('div');
     let name = document.createElement('span');
     let id = document.createElement('small');
+    let containerRemove = document.createElement('div');
+    let remove = document.createElement('a');
+    let removeIcon = document.createElement('i');
 
     containerUser.classList.add('list-group-item', 'list-group-item-action', 'user', 'd-flex', 'flex-row', 'justify-content-center', 'align-items-center', 'px-0', 'overflow-hidden');
 
@@ -44,12 +46,25 @@ function montarUsers(user) {
     id.classList.add('id', 'fs-6', 'text-secondary');
     id.innerText = user.id;
 
+    containerRemove.classList.add('d-flex', 'me-1');
+
+    remove.classList.add('remove', 'btn', 'fs-3');
+    remove.setAttribute('tabindex', '-1');
+    remove.setAttribute('role', 'button');
+
+    removeIcon.classList.add('bi', 'bi-x');
+
+    remove.appendChild(removeIcon);
+
+    containerRemove.appendChild(remove);
+
     containerAvatar.appendChild(avatar);
 
     info.appendChild(name);
     info.appendChild(id);
 
     containerInfo.appendChild(info);
+    containerInfo.appendChild(containerRemove);
 
     containerUser.appendChild(containerAvatar);
     containerUser.appendChild(containerInfo);
