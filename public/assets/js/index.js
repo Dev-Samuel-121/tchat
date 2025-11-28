@@ -15,6 +15,7 @@ let btnSelectUsers = document.querySelector('#btnSelectUser');
 btnSelectUsers.addEventListener('click', async () => {
     let users = await getUsers();
     users.forEach(montarUsers);
+    registerRemoveButtons();
 });
 
 function montarUsers(user) {
@@ -69,6 +70,53 @@ function montarUsers(user) {
     containerUser.appendChild(containerAvatar);
     containerUser.appendChild(containerInfo);
     selectUsers.appendChild(containerUser);
+}
+
+function registerRemoveButtons() {
+    const removeButtons = document.querySelectorAll('.remove');
+
+    removeButtons.forEach(btn => {
+        btn.addEventListener('click', async () => {
+
+            const containerUser = btn.closest('.user'); // elemento do botão
+            const id = containerUser.querySelector('.id').innerText;
+
+            const fd = new FormData();
+            fd.append('id', id);
+
+            const success = await removeUser(fd);
+
+            if (success) containerUser.remove();
+        });
+    });
+}
+
+async function removeUser(fd) {
+    try {
+        const response = await fetch('assets/php/remover_usuario.php', {
+            method: 'POST',
+            body: fd
+        });
+
+        const text = await response.text();
+        console.log("SERVER:", text);
+
+        return true;
+    } catch (e) {
+        console.log("Erro ao remover usuário:", e);
+        return false;
+    }
+}
+
+async function remove(fd) {
+    try {
+        response = await fetch('assets/php/remover_usuario.php', { method: 'POST', body: fd });
+        data = await response.text();
+
+        console.log('Usuario removido com sucesso!');
+    } catch (e) {
+        console.log(`Erro na remoção do usuário: ${e}`);
+    }
 }
 
 async function getUsers() {

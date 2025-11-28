@@ -62,6 +62,19 @@ class User
         }
     }
 
+    public function remove_user($id)
+    {
+        try {
+            $query = "DELETE FROM users WHERE id = ?";
+            $stmt = $this->con->prepare($query);
+            $stmt->execute([$id]);
+
+            echo "$id removido";
+        } catch (Exception $e) {
+            echo "Erro na remoção do usuario $id: " . $e;
+        }
+    }
+
     public function get_users()
     {
         $query = "SELECT id, username, created, avatar FROM users";
