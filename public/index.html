@@ -19,6 +19,10 @@
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCreateUser">
         Create User Modal
     </button>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalSelectUser"
+        id="btnSelectUser">
+        Select User Modal
+    </button>
 
     <!-- OFFCANVAS CHAT -->
     <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
@@ -162,6 +166,62 @@
                         <button type="submit" class="btn btn-primary" id="autoUser">Create</button>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL SELECT USER -->
+    <div class="modal fade" id="modalSelectUser" tabindex="-1" aria-labelledby="modalSelectUserLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="modalSelectUserLabel">Select User</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="users list-group">
+                        <button
+                            class="list-group-item list-group-item-action user d-flex flex-row justify-content-center align-items-center px-0 overflow-hidden">
+                            <div class="mx-3 d-flex justify-content-center align-items-center">
+                                <div class="avatar rounded-circle"
+                                    style="background-image: url('https://randomuser.me/api/portraits/men/15.jpg');">
+                                </div>
+                            </div>
+                            <div class="info d-flex justify-content-start align-items-center w-100 fs-5">
+                                <div class="d-flex flex-column w-100">
+                                    <span class="name">Elói Vieira</span>
+                                    <span
+                                        class="id fs-6 text-secondary"><small>019ac6a4-f435-7156-bec7-fb9d9afafe15</small></span>
+                                </div>
+                                <div class="d-flex me-1">
+                                    <a class="btn fs-3" tabindex="-1" role="button" id="remove"><i
+                                            class="bi bi-x"></i></a>
+                                </div>
+                            </div>
+                        </button>
+
+                        <button
+                            class="list-group-item list-group-item-action user d-flex flex-row justify-content-center align-items-center px-0 overflow-hidden">
+                            <div class="avatar mx-3 d-flex justify-content-center align-items-center">
+                                <div class="avatar rounded-circle"
+                                    style="background-image: url('https://randomuser.me/api/portraits/men/15.jpg');">
+                                </div>
+                            </div>
+                            <div class="info d-flex justify-content-start align-items-center w-100 fs-5">
+                                <div class="d-flex flex-column w-100">
+                                    <span class="name">Elói Vieira</span>
+                                    <span
+                                        class="id fs-6 text-secondary"><small>019ac6a4-f435-7156-bec7-fb9d9afafe15</small></span>
+                                </div>
+                                <div class="d-flex me-1">
+                                    <a class="btn fs-3" tabindex="-1" role="button" id="remove"><i
+                                            class="bi bi-x"></i></a>
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

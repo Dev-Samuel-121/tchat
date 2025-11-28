@@ -9,6 +9,64 @@ const inputGender = document.querySelector('#gender');
 const inputUsers = document.querySelector('#users');
 const numberUsers = document.querySelector('#numberUsers');
 
+let selectUsers = document.querySelector('.users');
+let btnSelectUsers = document.querySelector('#btnSelectUser');
+
+btnSelectUsers.addEventListener('click', async () => {
+    let containerUsers = selectUsers.querySelectorAll('.user');
+    let users = await getUsers();
+    users.forEach(montarUsers);
+});
+
+function montarUsers(user) {
+    let containerUser = document.createElement('button');
+    let containerAvatar = document.createElement('div');
+    let avatar = document.createElement('div');
+    let containerInfo = document.createElement('div');
+    let info = document.createElement('div');
+    let name = document.createElement('span');
+    let id = document.createElement('small');
+
+    containerUser.classList.add('list-group-item', 'list-group-item-action', 'user', 'd-flex', 'flex-row', 'justify-content-center', 'align-items-center', 'px-0', 'overflow-hidden');
+
+    containerAvatar.classList.add('mx-3', 'd-flex', 'justify-content-center', 'align-items-center');
+
+    avatar.classList.add('avatar', 'rounded-circle');
+    avatar.style.backgroundImage = `url(${user.avatar})`;
+
+    containerInfo.classList.add('info', 'd-flex', 'justify-content-start', 'align-items-center', 'w-100', 'fs-5');
+
+    info.classList.add('d-flex', 'flex-column', 'w-100');
+
+    name.classList.add('name');
+    name.innerText = user.username;
+
+    id.classList.add('id', 'fs-6', 'text-secondary');
+    id.innerText = user.id;
+
+    containerAvatar.appendChild(avatar);
+
+    info.appendChild(name);
+    info.appendChild(id);
+
+    containerInfo.appendChild(info);
+
+    containerUser.appendChild(containerAvatar);
+    containerUser.appendChild(containerInfo);
+    selectUsers.appendChild(containerUser);
+}
+
+async function getUsers() {
+    try {
+        let response = await fetch('assets/php/pegar_usuarios.php');
+        let data = await response.json();
+
+        return data;
+    } catch (error) {
+        console.error(`Erro na coleta de usuários: ${error}`);
+    }
+}
+
 // === PASSWORD SHOW/HIDE ===
 btnPasswordPreview.addEventListener('click', () => {
     const icon = btnPasswordPreview.querySelector('i');

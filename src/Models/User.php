@@ -62,6 +62,16 @@ class User
         }
     }
 
+    public function get_users()
+    {
+        $query = "SELECT id, username, created, avatar FROM users";
+        $stmt = $this->con->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+
+        return $result;
+    }
+
     private function get_auto_users($results = 1, $gender = '', $nationalities = '')
     {
         $url = "https://randomuser.me/api/?results=$results&gender=$gender&nat=$nationalities";
