@@ -14,6 +14,7 @@ let btnSelectUsers = document.querySelector('#btnSelectUser');
 
 btnSelectUsers.addEventListener('click', async () => {
     let users = await getUsers();
+    selectUsers.innerHTML = '';
     users.forEach(montarUsers);
     registerRemoveButtons();
 });
