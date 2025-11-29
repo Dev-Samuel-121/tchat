@@ -179,6 +179,7 @@ formCreateUser.addEventListener('submit', (e) => {
             console.log(resposta);
             alert("Usuário salvo!");
             formCreateUser.reset();
+            avatarPreview.style.backgroundImage = '';
             formCreateUser.classList.remove('was-validated');
         })
         .catch(err => {
