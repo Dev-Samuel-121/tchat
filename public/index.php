@@ -71,18 +71,20 @@
                             <input type="text" name="inputUsername" id="username" class="form-control"
                                 placeholder="Username" required>
                             <label for="username">Username</label>
-                            <div class="valid-feedback">Looks good!</div>
-                            <div class="invalid-feedback">Insert the username</div>
+                            <div class="valid-feedback"></div>
+                            <div class="invalid-feedback"></div>
                         </div>
                         <!-- Password -->
-                        <div class="form-floating mb-3 position-relative">
-                            <input type="password" name="inputPassword" id="password" class="form-control pe-5"
-                                placeholder="Password" required>
-                            <label for="password">Password</label>
-                            <button type="button" class="btn btn-outline-secondary position-absolute top-0 end-0 h-100"
-                                id="passwordPreview"><i class="bi bi-eye"></i></button>
-                            <div class="valid-feedback">Looks good!</div>
-                            <div class="invalid-feedback">Insert the password</div>
+                        <div>
+                            <div class="form-floating d-flex flex-row mb-3">
+                                <input type="password" name="inputPassword" id="password" class="form-control pe-5 rounded-end-0"
+                                    placeholder="Password" required>
+                                <label for="password">Password</label>
+                                <button type="button" class="btn btn-outline-secondary rounded-start-0"
+                                    id="passwordPreview"><i class="bi bi-eye"></i></button>
+                            </div>
+                            <div class="valid-feedback"></div>
+                            <div class="invalid-feedback"></div>
                         </div>
                     </div>
                     <div class="modal-footer d-flex justify-content-between">
