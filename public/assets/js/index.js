@@ -12,6 +12,22 @@ const numberUsers = document.querySelector('#numberUsers');
 let selectUsers = document.querySelector('.users');
 let btnSelectUsers = document.querySelector('#btnSelectUser');
 
+let avatarPreview = document.querySelector('.avatarPreview');
+let inputAvatar = document.querySelector('#avatar');
+
+inputAvatar.addEventListener('change', function () {
+    const file = this.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = () => {
+            avatarPreview.style.backgroundImage = `url(${reader.result})`;
+            avatarPreview.style.backgroundSize = 'cover';
+            avatarPreview.style.backgroundPosition = 'center';
+        };
+        reader.readAsDataURL(file);
+    }
+});
+
 btnSelectUsers.addEventListener('click', async () => {
     let users = await getUsers();
     selectUsers.innerHTML = '';
