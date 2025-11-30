@@ -62,7 +62,7 @@
                                 class="d-flex justify-content-center align-items-center m-auto border rounded-circle position-relative avatarPreview overflow-hidden">
                                 <input type="file" name="inputAvatar" id="avatar" class="form-control rounded-circle">
                                 <label for="avatar" class="fs-4 d-flex contrast rounded-circle justify-content-center align-items-center bg-black w-100 h-100 position-absolute edit">
-                                    <i class="bi bi-pen"></i>
+                                    <i class="bi bi-camera fs-1"></i>
                                 </label>
                             </div>
                         </div>
