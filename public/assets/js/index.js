@@ -46,12 +46,15 @@ function montarUsers(user) {
     let containerRemove = document.createElement('div');
     let remove = document.createElement('a');
     let removeIcon = document.createElement('i');
+    let avatarSize = '4em';
 
     containerUser.classList.add('list-group-item', 'list-group-item-action', 'user', 'd-flex', 'flex-row', 'justify-content-center', 'align-items-center', 'px-0', 'overflow-hidden');
 
     containerAvatar.classList.add('mx-3', 'd-flex', 'justify-content-center', 'align-items-center');
 
     avatar.classList.add('avatar', 'rounded-circle');
+    avatar.style.width = avatarSize;
+    avatar.style.height = avatarSize;
     avatar.style.backgroundImage = `url(${user.avatar})`;
 
     containerInfo.classList.add('info', 'd-flex', 'justify-content-start', 'align-items-center', 'w-100', 'fs-5');
@@ -170,6 +173,52 @@ formCreateUser.addEventListener('submit', (e) => {
 
     const formData = new FormData(formCreateUser);
 
+    let containerCreatedUser = document.createElement('div');
+    let createdUser = document.createElement('div');
+    let avatar = document.createElement('div');
+    let avatarImage = document.querySelector('.avatarPreview').style.backgroundImage;
+    let info = document.createElement('div');
+    let created = document.createElement('span');
+    let username = document.createElement('span');
+    let usernameText = document.querySelector('#username').value;
+    let container = formCreateUser.querySelector('.modal-body');
+
+    let blur = '20px';
+    let avatarSize = '5em';
+
+    containerCreatedUser.classList.add('containerCreatedUser', 'position-relative', 'z-1', 'w-100', 'position-absolute', 'top-0', 'start-0', 'h-25', 'px-2', 'py-2');
+
+    createdUser.classList.add('createdUser', 'position-relative', 'z-1', 'border', 'border-1', 'rounded-pill', 'w-100', 'top-0', 'start-0', 'h-100', 'd-flex', 'flex-row', 'justify-content-start', 'align-items-center', 'px-2', 'gap-3');
+
+    avatar.classList.add('avatar', 'border', 'rounded-circle');
+
+    info.classList.add('d-flex', 'flex-column', 'col-9');
+
+    created.classList.add('text-white-50');
+
+    username.classList.add('username', 'text-truncate', 'w-100', 'fs-3');
+
+    createdUser.style.backdropFilter = `blur(${blur})`;
+    createdUser.style.opacity = '0';
+
+    avatar.style.width = avatarSize;
+    avatar.style.height = avatarSize;
+    avatar.style.backgroundImage = avatarImage;
+
+    created.innerText = 'Created';
+
+    username.innerText = usernameText;
+
+    info.appendChild(created);
+    info.appendChild(username);
+
+    createdUser.appendChild(avatar);
+    createdUser.appendChild(info);
+
+    containerCreatedUser.appendChild(createdUser);
+
+    container.appendChild(containerCreatedUser);
+
     fetch("assets/php/salvar_usuario.php", {
         method: "POST",
         body: formData
@@ -177,10 +226,17 @@ formCreateUser.addEventListener('submit', (e) => {
         .then(r => r.text())
         .then(resposta => {
             console.log(resposta);
-            alert("Usuário salvo!");
-            formCreateUser.reset();
-            avatarPreview.style.backgroundImage = '';
-            formCreateUser.classList.remove('was-validated');
+
+            createdUser.style.opacity = '1';
+            setTimeout(() => {
+
+                container.removeChild(containerCreatedUser);
+                formCreateUser.reset();
+                avatarPreview.style.backgroundImage = '';
+                formCreateUser.classList.remove('was-validated');
+            }, 5000);
+
+            setTimeout(() => { createdUser.style.opacity = '0'; }, 4000);
         })
         .catch(err => {
             console.error(err);

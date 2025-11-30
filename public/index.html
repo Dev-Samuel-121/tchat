@@ -55,14 +55,15 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form id="formCreateUser" class="needs-validation" enctype="multipart/form-data" novalidate>
-                    <div class="modal-body">
+                    <div class="modal-body position-relative">
                         <!-- Avatar -->
                         <div class="mb-3">
                             <div
-                                class="d-flex justify-content-center align-items-center m-auto border rounded-circle position-relative avatarPreview">
+                                class="d-flex justify-content-center align-items-center m-auto border rounded-circle position-relative avatarPreview overflow-hidden">
                                 <input type="file" name="inputAvatar" id="avatar" class="form-control rounded-circle">
-                                <label for="avatar" class="fs-4 position-absolute edit"><i
-                                        class="bi bi-pen"></i></label>
+                                <label for="avatar" class="fs-4 d-flex contrast rounded-circle justify-content-center align-items-center bg-black w-100 h-100 position-absolute edit">
+                                    <i class="bi bi-pen"></i>
+                                </label>
                             </div>
                         </div>
                         <!-- Username -->
@@ -70,18 +71,20 @@
                             <input type="text" name="inputUsername" id="username" class="form-control"
                                 placeholder="Username" required>
                             <label for="username">Username</label>
-                            <div class="valid-feedback">Looks good!</div>
-                            <div class="invalid-feedback">Insert the username</div>
+                            <div class="valid-feedback"></div>
+                            <div class="invalid-feedback"></div>
                         </div>
                         <!-- Password -->
-                        <div class="form-floating mb-3 position-relative">
-                            <input type="password" name="inputPassword" id="password" class="form-control pe-5"
-                                placeholder="Password" required>
-                            <label for="password">Password</label>
-                            <button type="button" class="btn btn-outline-secondary position-absolute top-0 end-0 h-100"
-                                id="passwordPreview"><i class="bi bi-eye"></i></button>
-                            <div class="valid-feedback">Looks good!</div>
-                            <div class="invalid-feedback">Insert the password</div>
+                        <div>
+                            <div class="form-floating d-flex flex-row mb-3">
+                                <input type="password" name="inputPassword" id="password" class="form-control pe-5 rounded-end-0"
+                                    placeholder="Password" required>
+                                <label for="password">Password</label>
+                                <button type="button" class="btn btn-outline-secondary rounded-start-0"
+                                    id="passwordPreview"><i class="bi bi-eye"></i></button>
+                            </div>
+                            <div class="valid-feedback"></div>
+                            <div class="invalid-feedback"></div>
                         </div>
                     </div>
                     <div class="modal-footer d-flex justify-content-between">
@@ -183,7 +186,7 @@
                     <div class="users list-group">
                         <button
                             class="list-group-item list-group-item-action user d-flex flex-row justify-content-center align-items-center px-0 overflow-hidden">
-                            <div class="mx-3 d-flex justify-content-center align-items-center">
+                            <div class="avatar mx-3 d-flex justify-content-center align-items-center">
                                 <div class="avatar rounded-circle"
                                     style="background-image: url('https://randomuser.me/api/portraits/men/15.jpg');">
                                 </div>

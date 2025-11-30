@@ -55,7 +55,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form id="formCreateUser" class="needs-validation" enctype="multipart/form-data" novalidate>
-                    <div class="modal-body">
+                    <div class="modal-body position-relative">
                         <!-- Avatar -->
                         <div class="mb-3">
                             <div

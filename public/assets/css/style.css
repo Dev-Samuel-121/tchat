@@ -2,9 +2,12 @@
     display: none;
 }
 
-.avatar {
-    width: 4em;
-    height: 4em;
+.createdUser {
+    transition: opacity .5s ease;
+}
+
+.avatar,
+.avatarPreview {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
