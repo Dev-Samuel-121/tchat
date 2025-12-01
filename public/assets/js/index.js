@@ -248,10 +248,35 @@ formCreateUser.addEventListener('submit', (e) => {
 btnAutoUser.addEventListener('click', (e) => {
     e.preventDefault();
 
+    let modal = document.querySelector('#modalAutoUser').querySelector('.modal-body');
+    let container = document.createElement('div');
+    let content = document.createElement('div');
+    let info = document.createElement('div');
+    let text = document.createElement('span');
+    let blur = '20px';
+
     const fd = new FormData();
     fd.append('nationality', inputNationality.value);
     fd.append('gender', inputGender.value);
     fd.append('users', numberUsers.value);
+
+    container.classList.add('position-relative', 'z-1', 'w-100', 'position-absolute', 'top-0', 'start-0', 'px-2');
+
+    content.classList.add('createdUser', 'position-relative', 'z-1', 'border', 'border-1', 'rounded-pill', 'w-100', 'top-0', 'start-0', 'h-100', 'd-flex', 'flex-row', 'justify-content-start', 'align-items-center', 'p-3', 'my-2', 'gap-3');
+
+    content.style.backdropFilter = `blur(${blur})`;
+    content.style.opacity = '0';
+
+    info.classList.add('d-flex', 'flex-column', 'col-9');
+
+    text.classList.add('text-truncate', 'w-100', 'fs-3');
+
+    text.innerText = `${numberUsers.value} ${numberUsers.value > 1 ? 'users' : 'user'} were created`;
+
+    info.appendChild(text);
+    content.appendChild(info);
+    container.appendChild(content);
+    modal.appendChild(container);
 
     fetch("assets/php/auto_user.php", {
         method: "POST",
@@ -260,7 +285,13 @@ btnAutoUser.addEventListener('click', (e) => {
         .then(r => r.text())
         .then(resposta => {
             console.log(resposta);
-            alert("Usuário(s) salvo(s)!");
+
+            content.style.opacity = '1';
+            setTimeout(() => {
+                modal.removeChild(container);
+            }, 5000);
+
+            setTimeout(() => { content.style.opacity = '0'; }, 4000);
         })
         .catch(err => {
             console.error(err);

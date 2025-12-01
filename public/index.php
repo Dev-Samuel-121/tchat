@@ -106,7 +106,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form id="formAutoUser" class="needs-validation" novalidate>
-                    <div class="modal-body">
+                    <div class="modal-body position-relative">
                         <!-- Nationality -->
                         <div class="mb-3">
                             <label for="nationality" class="form-label">Nationality</label>
