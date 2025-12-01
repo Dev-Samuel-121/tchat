@@ -15,18 +15,36 @@ let btnSelectUsers = document.querySelector('#btnSelectUser');
 let avatarPreview = document.querySelector('.avatarPreview');
 let inputAvatar = document.querySelector('#avatar');
 
+function previewAvatar(file) {
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+        avatarPreview.style.backgroundImage = `url(${reader.result})`;
+        avatarPreview.style.backgroundSize = 'cover';
+        avatarPreview.style.backgroundPosition = 'center';
+    };
+    reader.readAsDataURL(file);
+}
+
 inputAvatar.addEventListener('change', function () {
-    const file = this.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = () => {
-            avatarPreview.style.backgroundImage = `url(${reader.result})`;
-            avatarPreview.style.backgroundSize = 'cover';
-            avatarPreview.style.backgroundPosition = 'center';
-        };
-        reader.readAsDataURL(file);
-    }
+    previewAvatar(this.files[0]);
 });
+
+avatarPreview.addEventListener('drop', function (e) {
+    e.preventDefault();
+
+    const file = e.dataTransfer.files[0];
+    if (!file) return;
+
+    previewAvatar(e.dataTransfer.files[0]);
+
+    const dt = new DataTransfer();
+    dt.items.add(file);
+    inputAvatar.files = dt.files;
+});
+
+avatarPreview.addEventListener('dragover', (e) => { e.preventDefault() });
 
 btnSelectUsers.addEventListener('click', async () => {
     let users = await getUsers();
